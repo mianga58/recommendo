@@ -25,7 +25,7 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 #init MYSQL
 mysql = MySQL(app)
 
-@app.route("/")
+@app.route('/')
 def index():
     return render_template("home.html")
 

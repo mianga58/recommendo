@@ -4,10 +4,11 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 import numpy as np
+from flaskext.mysql import MySQL
 
 
 #importing MySQL library
-from flask_mysqldb import MySQL
+#from flask_mysqldb import MySQL
 
 #importing the machine learning libraries
 import pickle
@@ -16,14 +17,15 @@ app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
 
 #Config MySQL
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'users'
+app.config['MYSQL_HOST'] = 'us-cdbr-iron-east-05.cleardb.net'
+app.config['MYSQL_USER'] = 'b3eee2d3601c43'
+app.config['MYSQL_PASSWORD'] = '9f8d73f5'
+app.config['MYSQL_DB'] = 'heroku_c241604c99e7e47'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 #init MYSQL
-mysql = MySQL(app)
+mysql = MySQL()
+mysql.init_app(app)
 
 @app.route('/')
 def index():

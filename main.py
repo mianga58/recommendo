@@ -116,7 +116,7 @@ def login():
             if result > 0:
                 # Get stored hash
                 data = cur.fetchone()
-                password = data[1]
+                password = data('password')
 
                 #Compare Password
                 if sha256_crypt.verify(password_candidate, password):

@@ -111,7 +111,7 @@ def login():
 
             #Get user by username
             result = cur.execute("SELECT * FROM users WHERE username = %s",
-                                 [username]).
+                                 [username])
 
             if result > 0:
                 # Get stored hash

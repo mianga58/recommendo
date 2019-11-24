@@ -4,7 +4,7 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 import numpy as np
-from flask.ext.mysql import MySQL
+from flaskext.mysql import MySQL
 
 
 #importing MySQL library
@@ -81,7 +81,7 @@ def register():
         password = sha256_crypt.encrypt(str(form.password.data))
 
         #create cursor
-        cur = mysql.connection.cursor()
+        cur = mysql.get_db().cursor()
 
         #Execute query
         cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, username, password))
@@ -106,7 +106,7 @@ def login():
             password_candidate = request.form['password']
 
             #Create cursor
-            cur = mysql.connection.cursor()
+            cur = mysql.get_db().cursor()
 
             #Get user by username
             result = cur.execute("SELECT * FROM users WHERE username = %s",

@@ -111,11 +111,11 @@ def login():
 
             #Get user by username
             result = cur.execute("SELECT * FROM users WHERE username = %s",
-                                 [username]).fetchone()
+                                 [username]).
 
             if result > 0:
                 # Get stored hash
-                data = cur.fetchone()
+                data = cur.fetchone[]
                 password = data['password']
 
                 #Compare Password

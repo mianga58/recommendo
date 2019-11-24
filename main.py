@@ -4,7 +4,7 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 import numpy as np
-from flaskext.mysql import MySQL
+from flask.ext.mysql import MySQL
 
 
 #importing MySQL library
@@ -24,7 +24,7 @@ app.config['MYSQL_DB'] = 'heroku_c241604c99e7e47'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 #init MYSQL
-mysql = MySQL()
+#mysql = MySQL()
 mysql.init_app(app)
 
 @app.route('/')

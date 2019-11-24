@@ -17,10 +17,10 @@ app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
 
 #Config MySQL
-app.config['MYSQL_HOST'] = 'us-cdbr-iron-east-05.cleardb.net'
-app.config['MYSQL_USER'] = 'b3eee2d3601c43'
-app.config['MYSQL_PASSWORD'] = '9f8d73f5'
-app.config['MYSQL_DB'] = 'heroku_c241604c99e7e47'
+app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-iron-east-05.cleardb.net'
+app.config['MYSQL_DATABASE_USER'] = 'b3eee2d3601c43'
+app.config['MYSQL_DATABASE_PASSWORD'] = '9f8d73f5'
+app.config['MYSQL_DATABASE_DB'] = 'heroku_c241604c99e7e47'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 #init MYSQL
@@ -87,7 +87,7 @@ def register():
         cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, username, password))
 
         #commit to DB
-        mysql.connection.commit()
+        mysql.get_db().commit()
 
         #close connection
         cur.close()

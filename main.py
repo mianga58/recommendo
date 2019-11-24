@@ -14,6 +14,7 @@ from flaskext.mysql import MySQL
 import pickle
 
 app = Flask(__name__)
+app.secret_key = 'secret123'
 model = pickle.load(open('model.pkl', 'rb'))
 
 #Config MySQL
@@ -162,5 +163,4 @@ def dashboard():
     return render_template('dashboard.html')
 
 if __name__ == "__main__":
-    app.secret_key = 'secret123'
     app.run(debug=True)

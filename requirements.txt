@@ -11,10 +11,6 @@ matplotlib==3.1.1
 numpy==1.17.3
 pandas==0.25.3
 sklearn==0.0
-Flask-MySQLdb==0.2.0
-Flask-pymysql==0.2.3
-PyMySQL==0.9.3
-PyMysqlDB==0.0.2
 mysqlclient==1.4.5
-
+flask-mysql==1.4.0
 

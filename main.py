@@ -122,7 +122,7 @@ def login():
                         error = 'Invalid login'
                         return render_template("login.html", error=error)
 
-             else:
+                    else:
                 error = 'Username not found'
                 return render_template("login.html", error=error)
 

@@ -3,19 +3,11 @@ from flask import Flask, render_template, flash, redirect, request, url_for, ses
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
-import numpy as np
 from flaskext.mysql import MySQL
 
 
-#importing MySQL library
-#from flask_mysqldb import MySQL
-
-#importing the machine learning libraries
-import pickle
-
 app = Flask(__name__)
 app.secret_key = 'secret123'
-model = pickle.load(open('model.pkl', 'rb'))
 
 #Config MySQL
 app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-iron-east-05.cleardb.net'
@@ -37,24 +29,9 @@ def profile():
     return render_template("profile.html")
 
 @app.route("/predictor", methods=['GET','POST'])
-def predict():
-    ''' For rendering results on HTML GUI '''
-
-    int_features = [int(x) for x in request.form.values()]
-    final_features = [np.array(int_features)]
-    prediction = model.predict(final_features)
-
-    output = round(prediction[0], 2)
-    return render_template("predictor.html",  prediction_text='Employee Salary should be $ {}'.format(output))
-
-@app.route('/predictor_api',methods=['GET','POST'])
-def predict_api():
-    ''' For direct API calls trought request '''
-    data = request.get_json(force=True)
-    prediction = model.predict([np.array(list(data.values()))])
-
-    output = prediction[0]
-    return jsonify(output)
+def predictor():
+  
+    return render_template("predictor.html")
 
 @app.route("/about")
 def about():

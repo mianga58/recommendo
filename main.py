@@ -80,7 +80,7 @@ def profile():
     return render_template("profile.html")
 
 @app.route("/predictor1")
-def profile():
+def predictor1():
     return render_template("predictor1.html")
 
 @app.route("/predictor", methods=['GET','POST'])
@@ -92,9 +92,6 @@ def predictor():
         return render_template('predictor.html',movie=movie,r=r,t='s')
     else:
         return render_template('predictor.html',movie=movie,r=r,t='l')
-
-
-    return render_template("predictor.html")
 
 @app.route("/about")
 def about():

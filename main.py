@@ -79,6 +79,10 @@ def index():
 def profile():
     return render_template("profile.html")
 
+@app.route("/predictor1")
+def profile():
+    return render_template("predictor1.html")
+
 @app.route("/predictor", methods=['GET','POST'])
 def predictor():
     movie = request.args.get('movie')

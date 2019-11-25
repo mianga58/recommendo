@@ -135,7 +135,7 @@ def login():
                error = 'Username not found'
                return render_template("login.html", error=error)
 
-       return render_template('login.html')
+return render_template('login.html')
            # close connection
        cur.close()
 

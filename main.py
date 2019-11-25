@@ -131,13 +131,13 @@ def login():
                     return render_template("login.html", error=error)
 
 
-           else:
+            else:
                error = 'Username not found'
                return render_template("login.html", error=error)
 
-      return render_template('login.html')
+       return render_template('login.html')
            # close connection
-      cur.close()
+       cur.close()
 
 #check if user logged in
 def is_logged_in(f):

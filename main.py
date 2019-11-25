@@ -109,18 +109,27 @@ def login():
             #Create cursor
             cur = mysql.get_db().cursor()
 
-            cur.execute("SELECT COUNT(1) FROM users WHERE name = %s;", [username]) # CHECKS IF USERNAME EXSIST
-           if cur.fetchone()[0]:
-                cur.execute("SELECT password FROM users WHERE name = %s;", [username]) # FETCH THE HASHED PASSWORD
-                for row in cur.fetchall():
-                    if sha256_crypt.verify(password_candidate, row[0]):
-                        session['logged_in'] = True
-                        session['username'] = username
-                        flash('You are now logged in', 'success')
-                        return redirect(url_for('dashboard'))
-                    else:
-                        error = 'Invalid login'
-                        return render_template("login.html", error=error)
+          #Get user by username
+            result = cur.execute("SELECT * FROM users WHERE username = %s",
+                                 [username])
+
+            if result > 0:
+                # Get stored hash
+                data = cur.fetchone()
+                password = data['password']
+
+                #Compare Password
+                if sha256_crypt.verify(password_candidate, password):
+                    #passed
+                    session['logged_in'] = True
+                    session['username'] = username
+
+                    flash('You are now logged in', 'success')
+                    return redirect(url_for('dashboard'))
+                else:
+                    error = 'Invalid login'
+                    return render_template("login.html", error=error)
+
 
            else:
                error = 'Username not found'

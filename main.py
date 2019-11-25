@@ -137,7 +137,7 @@ def login():
 
 return render_template('login.html')
            # close connection
-       cur.close()
+cur.close()
 
 #check if user logged in
 def is_logged_in(f):

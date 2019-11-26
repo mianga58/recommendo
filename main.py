@@ -1,5 +1,5 @@
 #importing the necessary libraries
-from flask import Flask, render_template, flash, redirect, request, url_for, session, logging, jsonify
+from flask import Flask, render_template, flash, redirect, request, url_for, session, logging
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
@@ -54,7 +54,7 @@ def rcmd(m):
         for i in range(len(lst)):
             a = lst[i][0]
             l.append(data['movie_title'][a])
-        return l
+        return (l)
 
 app = Flask(__name__)
 app.secret_key = 'secret123'
@@ -83,7 +83,7 @@ def profile():
 def predictor1():
     return render_template("predictor1.html")
 
-@app.route("/predictor", methods=['GET', 'POST'])
+@app.route("/predictor")
 def predictor():
     movie = request.args.get('movie')
     r = rcmd(movie)
@@ -148,7 +148,7 @@ def login():
 
             #Get user by username
             result = cur.execute("SELECT * FROM users WHERE username = %s",
-                                 [username])
+                                 (username))
              #commit to DB
             mysql.get_db().commit()
             

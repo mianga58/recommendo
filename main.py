@@ -69,7 +69,7 @@ def rcmd(m):
         for i in range(len(lst)):
             a = lst[i][0]
             l.append(data['movie_title'][a])
-        return l
+    return l
 
 @app.route('/')
 def index():

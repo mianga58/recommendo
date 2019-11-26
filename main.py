@@ -11,19 +11,6 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-
-
-#Config MySQL
-app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-iron-east-05.cleardb.net'
-app.config['MYSQL_DATABASE_USER'] = 'b3eee2d3601c43'
-app.config['MYSQL_DATABASE_PASSWORD'] = '9f8d73f5'
-app.config['MYSQL_DATABASE_DB'] = 'heroku_c241604c99e7e47'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-
-#init MYSQL
-mysql = MySQL()
-mysql.init_app(app)
-
 # define a function that creates similarity matrix
 # if it doesn't exist
 def create_sim():
@@ -71,7 +58,18 @@ def rcmd(m):
 
 app = Flask(__name__)
 app.secret_key = 'secret123'
-    
+
+#Config MySQL
+app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-iron-east-05.cleardb.net'
+app.config['MYSQL_DATABASE_USER'] = 'b3eee2d3601c43'
+app.config['MYSQL_DATABASE_PASSWORD'] = '9f8d73f5'
+app.config['MYSQL_DATABASE_DB'] = 'heroku_c241604c99e7e47'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+
+#init MYSQL
+mysql = MySQL()
+mysql.init_app(app)
+
     
 @app.route('/')
 def index():

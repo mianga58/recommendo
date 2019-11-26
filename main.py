@@ -83,7 +83,7 @@ def profile():
 def predictor1():
     return render_template("predictor1.html")
 
-@app.route("/predictor", methods=['GET','POST'])
+@app.route("/predictor")
 def predictor():
     movie = request.args.get('movie')
     r = rcmd(movie)
@@ -136,7 +136,7 @@ def register():
     return render_template('register.html', form=form)
 
 # User login
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST'])
 def login():
            if request.method == 'POST':
             # Get Form Fields

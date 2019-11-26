@@ -12,8 +12,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-app = Flask(__name__)
-app.secret_key = 'secret123'
 
 #Config MySQL
 app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-iron-east-05.cleardb.net'
@@ -69,8 +67,12 @@ def rcmd(m):
         for i in range(len(lst)):
             a = lst[i][0]
             l.append(data['movie_title'][a])
-    return l
+        return l
 
+app = Flask(__name__)
+app.secret_key = 'secret123'
+    
+    
 @app.route('/')
 def index():
     return render_template("home.html")

@@ -20,7 +20,7 @@ def create_sim():
     count_matrix = cv.fit_transform(data['comb'])
     # creating a similarity score matrix
     sim = cosine_similarity(count_matrix)
-    return data,sim
+    return (data,sim)
 
 # defining a function that recommends 10 most similar movies
 def rcmd(m):
@@ -28,7 +28,7 @@ def rcmd(m):
     # check if data and sim are already assigned
     try:
         data.head()
-        sim.shape
+        sim.shape()
     except:
         data, sim = create_sim()
     # check if the movie is in our database or not
@@ -149,7 +149,12 @@ def login():
             #Get user by username
             result = cur.execute("SELECT * FROM users WHERE username = %s",
                                  [username])
-
+             #commit to DB
+            mysql.get_db().commit()
+            
+            # close connection
+            cur.close()
+        
             if result > 0:
                 # Get stored hash
                 data = cur.fetchone()
@@ -173,8 +178,7 @@ def login():
                return render_template("login.html", error=error)
 
            return render_template('login.html')
-           # close connection
-           cur.close()
+           
 
 #check if user logged in
 def is_logged_in(f):

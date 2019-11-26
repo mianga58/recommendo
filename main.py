@@ -79,11 +79,11 @@ def index():
 def profile():
     return render_template("profile.html")
 
-@app.route("/predictor1")
+@app.route("/predictor1", methods=['GET', 'POST'])
 def predictor1():
     return render_template("predictor1.html")
 
-@app.route("/predictor")
+@app.route("/predictor", methods=['GET', 'POST'])
 def predictor():
     movie = request.args.get('movie')
     r = rcmd(movie)
@@ -136,7 +136,7 @@ def register():
     return render_template('register.html', form=form)
 
 # User login
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
            if request.method == 'POST':
             # Get Form Fields

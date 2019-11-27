@@ -5,6 +5,7 @@ from passlib.hash import sha256_crypt
 from functools import wraps
 import pandas as pd
 import numpy as np
+from flaskext.mysql import MySQL
 
 
 # libraries for making count matrix and similarity matrix
@@ -58,21 +59,6 @@ def rcmd(m):
         return l
 
 
-
-
-
-
-
-
-
-
-#importing MySQL library
-from flask_mysqldb import MySQL
-
-
-
-
-
 app = Flask(__name__)
 
 
@@ -88,14 +74,15 @@ def predictor():
 
 
 #Config MySQL
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'users'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-
-#init MYSQL
-mysql = MySQL(app)
+app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-iron-east-05.cleardb.net'
+app.config['MYSQL_DATABASE_PORT] = ''
+app.config['MYSQL_DATABASE_PASSWORD'] = '9f8d73f5'
+app.config['MYSQL_DATABASE_USER = 'b3eee2d3601c43'
+#app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.config['MYSQL_DATABASE_DB = 'users'
+           
+mysql = MySQL()
+mysql.init_app(app)
 
 @app.route('/')
 def index():
@@ -138,13 +125,13 @@ def register():
         password = sha256_crypt.encrypt(str(form.password.data))
 
         #create cursor
-        cur = mysql.connection.cursor()
+        cur = mysql.get_db().cursor()
 
         #Execute query
         cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, username, password))
 
         #commit to DB
-        mysql.connection.commit()
+        mysql.get_db().commit()
 
         #close connection
         cur.close()
@@ -163,7 +150,7 @@ def login():
             password_candidate = request.form['password']
 
             #Create cursor
-            cur = mysql.connection.cursor()
+            cur = mysql.get_db().cursor()
 
             #Get user by username
             result = cur.execute("SELECT * FROM users WHERE username = %s",

@@ -72,17 +72,18 @@ def predictor():
     else:
         return render_template('predictor.html', course=course, r=r, t='l')
 
+    mysql = MySQL()
+    mysql.init_app(app)
 
 #Config MySQL
 app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-iron-east-05.cleardb.net'
-app.config['MYSQL_DATABASE_PORT] = ''
+app.config['MYSQL_DATABASE_PORT'] = 3306
 app.config['MYSQL_DATABASE_PASSWORD'] = '9f8d73f5'
-app.config['MYSQL_DATABASE_USER = 'b3eee2d3601c43'
-#app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config['MYSQL_DATABASE_DB = 'users'
+app.config['MYSQL_DATABASE_USER']= 'b3eee2d3601c43'
+app.config['MYSQL_DATABASE_CURSORCLASS'] = 'DictCursor'
+app.config['MYSQL_DATABASE_DB']= 'users'
            
-mysql = MySQL()
-mysql.init_app(app)
+
 
 @app.route('/')
 def index():

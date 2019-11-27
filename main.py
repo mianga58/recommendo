@@ -157,7 +157,7 @@ def login():
             result = cur.execute("SELECT * FROM users WHERE username = %s",
                                  [username])
             
-               mysql.get_db().commit()
+            mysql.get_db().commit()
 
             if result > 0:
                 # Get stored hash
